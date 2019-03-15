@@ -27,7 +27,6 @@ public class Oscillator : MonoBehaviour
     {
 		updateSpeed();
 		transform.localPosition = new Vector3(Mathf.Cos(Time.time * speedX) * rangeX, Mathf.Cos(Time.time * speedY) * rangeY, 0.0f);
-		Debug.Log(Mathf.Cos(Time.time * speedX));
 	}
 
 	private void updateSpeed()

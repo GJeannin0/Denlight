@@ -9,6 +9,7 @@ TagManager:
   - Transformer
   - Attack
   - Stage Exit
+  - HoveringLight
   layers:
   - Default
   - TransparentFX
