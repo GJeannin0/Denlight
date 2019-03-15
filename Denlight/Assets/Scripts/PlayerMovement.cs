@@ -6,6 +6,7 @@ using System;
 public class PlayerMovement : MonoBehaviour
 {
 	private Rigidbody2D myRigidbody2D;
+	private uint shapeIndex = 0;							// 0 = circle, 1 = circle2, 2 = circle3, 3 = triangle, 4 = triangle2, 5 = triangle3, 6 = spiky, 7 = spiky2, 8 = spiky3  
 
 	[SerializeField] private float movementSpeed = 10.0f;
 
@@ -116,5 +117,6 @@ public class PlayerMovement : MonoBehaviour
 		{
 			myRigidbody2D.velocity = downRight * movementSpeed;
 		}
+		// mySmallMovement.MoveOrigin(transform.position);
 	}
 }
