@@ -35,9 +35,14 @@ public class Player : MonoBehaviour
 	[SerializeField] private float minimunLight = 0.30f;
 
 	[SerializeField] private Vector3 minimumSize;
+	[SerializeField] private Projectile myProjectile;
+	[SerializeField] private float projectileCd;
+	private float projectileTimer;
+	private Camera myCamera;
 
 	void Start()
     {
+		myCamera = FindObjectOfType<Camera>();
 		myRigidbody2D = GetComponent<Rigidbody2D>();
 		movementSpeed = baseMovementSpeed;
 		life = baseLife;
@@ -58,6 +63,22 @@ public class Player : MonoBehaviour
 
 		if (shapeIndex < 40)
 		{
+			if (shapeIndex < 20)
+			{
+				if (projectileTimer >= projectileCd)
+				{
+					if (Input.GetButton("Fire1"))
+					{
+						Instantiate(myProjectile, transform.position, Quaternion.LookRotation(transform.forward, (new Vector3(myCamera.ScreenToWorldPoint(Input.mousePosition).x, myCamera.ScreenToWorldPoint(Input.mousePosition).y, 0.0f) - transform.position).normalized));
+						projectileTimer = 0.0f;
+					}
+				}
+				else
+				{
+					projectileTimer += Time.deltaTime;
+				}
+			}
+
 			if (Input.GetAxis("Horizontal") > 0.0f)
 			{
 				if (Input.GetAxis("Vertical") > 0.0f)

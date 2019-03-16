@@ -189,7 +189,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4062137}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2001311405}
@@ -1735,6 +1735,9 @@ MonoBehaviour:
   minimunTransparency: 0.5
   minimunLight: 0.3
   minimumSize: {x: 0, y: 0, z: 0}
+  myProjectile: {fileID: 359809424777408242, guid: 4ebafab061a6bfd4d8fbbc7b818b79a8,
+    type: 3}
+  projectileCd: 0.1
 --- !u!4 &2014195494
 Transform:
   m_ObjectHideFlags: 0
