@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
 	[SerializeField] private Vector3 minimumSize;
 	[SerializeField] private Projectile myProjectile;
 	[SerializeField] private float projectileCd;
+	[SerializeField] private int attackDamage;
 	private float projectileTimer;
 	private Camera myCamera;
 
@@ -177,5 +178,10 @@ public class Player : MonoBehaviour
 		float lightPercentage = (float)life /baseLife;
 		float remainingLight = minimunLight + lightPercentage * (1.0f - minimunLight);
 		mySpriteRenderer.color = new Color(remainingLight, remainingLight, remainingLight, minimunTransparency + lightPercentage * (1.0f - minimunTransparency));
+	}
+
+	public int GetAttackDamage()
+	{
+		return attackDamage;
 	}
 }
