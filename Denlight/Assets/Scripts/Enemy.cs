@@ -7,6 +7,9 @@ public class Enemy : MonoBehaviour
 	[SerializeField] private int baseLife;
 	private int life;
 
+	private Vector3 baseScale;
+	[SerializeField] private Vector3 minimumScale;
+
 	[SerializeField] private float minimunTransparency = 0.50f;
 	[SerializeField] private float minimunLight = 0.30f;
 	private SpriteRenderer mySpriteRenderer;
@@ -16,6 +19,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		baseScale = transform.localScale;
 		myPlayer = FindObjectOfType<Player>();
 		life = baseLife;
 		mySpriteRenderer = GetComponent<SpriteRenderer>();
@@ -45,6 +49,7 @@ public class Enemy : MonoBehaviour
 		}
 		float lightPercentage = (float)life / baseLife;
 		float remainingLight = minimunLight + lightPercentage * (1.0f - minimunLight);
+		transform.localScale = (baseScale - minimumScale) * lightPercentage + minimumScale;
 		mySpriteRenderer.color = new Color(mySpriteRenderer.color.a, mySpriteRenderer.color.b, mySpriteRenderer.color.g, minimunTransparency + lightPercentage * (1.0f - minimunTransparency));
 	}
 }

@@ -11,6 +11,9 @@ public class Player : MonoBehaviour
 	private float movementSpeed;
 	[SerializeField] private float baseMovementSpeed = 10.0f;
 
+	private Vector3 baseScale;
+	[SerializeField] private Vector3 minimumScale;
+
 	private Vector2 right = new Vector2(1.0f, 0.0f);
 	private Vector2 upRight = new Vector2(1 / (float)Math.Sqrt(2), 1 / (float)Math.Sqrt(2));
 	private Vector2 up = new Vector2(0.0f, 1.0f);
@@ -48,6 +51,7 @@ public class Player : MonoBehaviour
 		movementSpeed = baseMovementSpeed;
 		life = baseLife;
 		mySpriteRenderer = myOscillator.gameObject.GetComponent<SpriteRenderer>();
+		baseScale = transform.localScale;
     }
 
    
@@ -177,6 +181,7 @@ public class Player : MonoBehaviour
 		life += amount;
 		float lightPercentage = (float)life /baseLife;
 		float remainingLight = minimunLight + lightPercentage * (1.0f - minimunLight);
+		transform.localScale = (baseScale - minimumScale) * lightPercentage + minimumScale;
 		mySpriteRenderer.color = new Color(remainingLight, remainingLight, remainingLight, minimunTransparency + lightPercentage * (1.0f - minimunTransparency));
 	}
 
