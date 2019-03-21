@@ -19,6 +19,8 @@ public class Automata : MonoBehaviour
 	[SerializeField] private float amountOfLiving;
 	[SerializeField] private int height;
 	[SerializeField] private int length;
+
+	private float donut = 5;
 	private Cell[,] map;
 
 
@@ -73,11 +75,11 @@ public class Automata : MonoBehaviour
 			{
 				if (map[i, j].alive)
 				{
-					Instantiate(aliveCell, new Vector3(3*j, 3*i, 0.0f), transform.rotation);
+					Instantiate(aliveCell, new Vector3(j, i, 0.0f), transform.rotation);
 				}
 				else
 				{
-					Instantiate(deadCell, new Vector3(3*j, 3*i, 0.0f), transform.rotation);
+					Instantiate(deadCell, new Vector3(j, i, 0.0f), transform.rotation);
 				}
 			}
 		}

@@ -44,6 +44,9 @@ public class Player : MonoBehaviour
 	private float projectileTimer;
 	private Camera myCamera;
 
+	[SerializeField] private float attackKnockback;
+	[SerializeField] private float shooterOffset;
+
 	void Start()
     {
 		myCamera = FindObjectOfType<Camera>();
@@ -74,7 +77,8 @@ public class Player : MonoBehaviour
 				{
 					if (Input.GetButton("Fire1"))
 					{
-						Instantiate(myProjectile, transform.position, Quaternion.LookRotation(transform.forward, (new Vector3(myCamera.ScreenToWorldPoint(Input.mousePosition).x, myCamera.ScreenToWorldPoint(Input.mousePosition).y, 0.0f) - transform.position).normalized));
+						Instantiate(myProjectile, transform.position + (new Vector3(myCamera.ScreenToWorldPoint(Input.mousePosition).x, myCamera.ScreenToWorldPoint(Input.mousePosition).y, 0.0f) - transform.position).normalized * shooterOffset,
+							Quaternion.LookRotation(transform.forward,(new Vector3(myCamera.ScreenToWorldPoint(Input.mousePosition).x, myCamera.ScreenToWorldPoint(Input.mousePosition).y, 0.0f) - transform.position).normalized));
 						projectileTimer = 0.0f;
 					}
 				}
@@ -188,5 +192,15 @@ public class Player : MonoBehaviour
 	public int GetAttackDamage()
 	{
 		return attackDamage;
+	}
+
+	public float GetAttackKnockback()
+	{
+		return attackKnockback;
+	}
+
+	public Vector2 GetVelocity()
+	{
+		return myRigidbody2D.velocity;
 	}
 }

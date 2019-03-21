@@ -14,18 +14,22 @@ public class Enemy : MonoBehaviour
 	[SerializeField] private float minimunLight = 0.30f;
 	private SpriteRenderer mySpriteRenderer;
 
+	private Rigidbody2D myRigidbody2D;
+
 	private Player myPlayer;
 
-    // Start is called before the first frame update
+	[SerializeField] private float knockbackSensibility;
+	[SerializeField] private GameObject mySpriteHolder;
+
     void Start()
     {
+		myRigidbody2D = GetComponent<Rigidbody2D>();
 		baseScale = transform.localScale;
 		myPlayer = FindObjectOfType<Player>();
 		life = baseLife;
-		mySpriteRenderer = GetComponent<SpriteRenderer>();
+		mySpriteRenderer = mySpriteHolder.GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -35,12 +39,20 @@ public class Enemy : MonoBehaviour
 	{
 		if (collision.gameObject.tag == ("Attack"))
 		{
-			changeLife(-myPlayer.GetAttackDamage());
+			ChangeLife(-myPlayer.GetAttackDamage());
+			Knockback(myPlayer.GetAttackKnockback(), collision.gameObject.transform.position);
+			rotateTowards(myPlayer.transform.position);
 			Destroy(collision.gameObject);
 		}
 	}
 
-	public void changeLife(int amount)
+	private void Knockback(float force, Vector3 knockerPos)
+	{
+		Vector2 direction = new Vector2(transform.position.x - knockerPos.x, transform.position.y - knockerPos.y).normalized;
+		myRigidbody2D.velocity += force * direction * knockbackSensibility;
+	}
+
+	public void ChangeLife(int amount)
 	{
 		life += amount;
 		if (life <= 0)
@@ -50,6 +62,11 @@ public class Enemy : MonoBehaviour
 		float lightPercentage = (float)life / baseLife;
 		float remainingLight = minimunLight + lightPercentage * (1.0f - minimunLight);
 		transform.localScale = (baseScale - minimumScale) * lightPercentage + minimumScale;
-		mySpriteRenderer.color = new Color(mySpriteRenderer.color.a, mySpriteRenderer.color.b, mySpriteRenderer.color.g, minimunTransparency + lightPercentage * (1.0f - minimunTransparency));
+		mySpriteRenderer.color = new Color(mySpriteRenderer.color.r, mySpriteRenderer.color.g, mySpriteRenderer.color.b, minimunTransparency + lightPercentage * (1.0f - minimunTransparency));
+	}
+
+	private void rotateTowards(Vector3 target)
+	{
+		transform.up = (target - transform.position).normalized;
 	}
 }

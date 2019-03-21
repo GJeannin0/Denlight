@@ -21,6 +21,7 @@ public class HoveringLight : MonoBehaviour
 	[SerializeField] private float accelerationTowardPlayer = 50.0f;
 	[SerializeField] private int dropGain = 4;
 
+	[SerializeField] private float predictingTime;
 
 	void Start()
     {
@@ -49,7 +50,8 @@ public class HoveringLight : MonoBehaviour
 
 		if (goingToPlayer)
 		{
-			myRigidbody2D.velocity += (new Vector2((myPlayer.transform.position - transform.position).normalized.x, (myPlayer.transform.position - transform.position).normalized.y)) * accelerationTowardPlayer * Time.deltaTime;
+			myRigidbody2D.velocity += (new Vector2(((myPlayer.transform.position + new Vector3(myPlayer.GetVelocity().x, myPlayer.GetVelocity().y,0.0f) * predictingTime) - transform.position).normalized.x,
+				(myPlayer.transform.position - transform.position).normalized.y)) * accelerationTowardPlayer * Time.deltaTime;
 
 			if ((myPlayer.transform.position - transform.position).magnitude <= absorbtionDistance)
 			{
@@ -68,11 +70,6 @@ public class HoveringLight : MonoBehaviour
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
-		/*	if (collision.gameObject.tag == ("Wall"))
-			{
-				myRigidbody2D.velocity = (transform.position - collision.gameObject.transform.position).normalized * (myRigidbody2D.velocity.magnitude * bounceOnWallsRatio + bounceOnWallsMinimumSpeed);
-			} */
-
 		if (collision.gameObject.tag == ("Player") && gameObject.tag == ("HoveringLight"))
 		{
 			goingToPlayer = true;
