@@ -23,6 +23,9 @@ public class HoveringLight : MonoBehaviour
 
 	[SerializeField] private float predictingTime;
 
+	[SerializeField] private float minSpeedMultiplier;
+	[SerializeField] private float maxSpeedMultiplier;
+
 	void Start()
     {
 		myPlayer = FindObjectOfType<Player>();
@@ -65,7 +68,7 @@ public class HoveringLight : MonoBehaviour
 	{
 		float angle = Random.Range(-2 * Mathf.PI, 2 * Mathf.PI); 
 		Vector2 direction = new Vector2(Mathf.Cos(angle),Mathf.Sin(angle));
-		myRigidbody2D.velocity += speed * direction;
+		myRigidbody2D.velocity += speed * direction * Random.Range(minSpeedMultiplier,maxSpeedMultiplier);
 	}
 
 	private void OnTriggerEnter2D(Collider2D collision)

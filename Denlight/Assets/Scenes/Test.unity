@@ -143,10 +143,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aliveCell: {fileID: 8617416436245020439, guid: 8e87c4d5329098642979560d4b15a5f3,
     type: 3}
-  deadCell: {fileID: 1073799007524256285, guid: 2e27ae16a5808b04a89a360b68823457,
+  roomCell: {fileID: 1960820024173316083, guid: df3c66b0991efa9489ac9840fddb3746,
     type: 3}
-  seed: 666
-  amountOfLiving: 0.5
+  room2Cell: {fileID: 8370937716053893941, guid: e5d968d8b12d42c49b9e07a3f5a6fdb8,
+    type: 3}
+  room3Cell: {fileID: 1632182579878183129, guid: 5d3759ef5ddc01749b506a01681216ac,
+    type: 3}
+  room4Cell: {fileID: 6937923241158992738, guid: efcc1c47521d6614a9824b85d0799bb6,
+    type: 3}
+  room5Cell: {fileID: 6709575182160569598, guid: 5e9eaef3c3cbd0745b729c9e572f33bd,
+    type: 3}
+  room6Cell: {fileID: 8045980124970629546, guid: c3cdf019c65c7c449b804a03761ac142,
+    type: 3}
+  room7Cell: {fileID: 3014769822470742404, guid: e705a16ca2f55c54ea9bc13162bc808d,
+    type: 3}
+  room8Cell: {fileID: 9127383594303826136, guid: b08fbdf19037bc442b706aae4a11bace,
+    type: 3}
+  deadCell: {fileID: 199076147309067630, guid: 5c868195eeee8894abd3ed8505f22ef7, type: 3}
+  wallCell: {fileID: 1974450865412078808, guid: b331a0382c13eb8499c87e50ee91e4c3,
+    type: 3}
+  seed: 7777
+  amountOfLiving: 0.48
   height: 80
   length: 80
   neighboursToSpawn: 5
@@ -494,11 +511,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimumSpeedX: 1
   maximumSpeedX: 2
-  speedVariationX: 0.01
+  speedVariationX: 0.005
   rangeX: 0.15
   minimumSpeedY: 1.5
   maximumSpeedY: 2
-  speedVariationY: 0.01
+  speedVariationY: 0.005
   rangeY: 0.2
 --- !u!58 &1707442212
 CircleCollider2D:
@@ -644,6 +661,8 @@ MonoBehaviour:
     type: 3}
   projectileCd: 0.1
   attackDamage: 10
+  attackKnockback: 0
+  shooterOffset: 0
 --- !u!4 &1848159791
 Transform:
   m_ObjectHideFlags: 0

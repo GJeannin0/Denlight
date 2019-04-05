@@ -76,6 +76,8 @@ MonoBehaviour:
   accelerationTowardPlayer: 50
   dropGain: 5
   predictingTime: 0.05
+  minSpeedMultiplier: 0.7
+  maxSpeedMultiplier: 1.3
 --- !u!82 &8499756467599368930
 AudioSource:
   m_ObjectHideFlags: 0

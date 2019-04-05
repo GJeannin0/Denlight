@@ -21,6 +21,9 @@ public class Enemy : MonoBehaviour
 	[SerializeField] private float knockbackSensibility;
 	[SerializeField] private GameObject mySpriteHolder;
 
+	[SerializeField] private int lootAmount;
+	[SerializeField] private GameObject lootHoveringLight;
+
     void Start()
     {
 		myRigidbody2D = GetComponent<Rigidbody2D>();
@@ -57,6 +60,7 @@ public class Enemy : MonoBehaviour
 		life += amount;
 		if (life <= 0)
 		{
+			spawnHoveringLights(lootAmount);
 			Destroy(gameObject);
 		}
 		float lightPercentage = (float)life / baseLife;
@@ -68,5 +72,13 @@ public class Enemy : MonoBehaviour
 	private void rotateTowards(Vector3 target)
 	{
 		transform.up = (target - transform.position).normalized;
+	}
+
+	private void spawnHoveringLights(int amount)
+	{
+		for (int i = 0; i < amount; i++)
+		{
+			Instantiate(lootHoveringLight, transform.position, transform.rotation);
+		}
 	}
 }
